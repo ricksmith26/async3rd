@@ -83,7 +83,8 @@ function fetchFilesAndLog(array, cb) {
     });
   });
 }
-//below is the same as lowbar once function
+
+// below is the same as lowbar once function
 function fetchFileWithSingleCall(fileName, cb) {
   let boo = false;
   getFileMany(fileName, function(error, file) {
@@ -93,7 +94,29 @@ function fetchFileWithSingleCall(fileName, cb) {
     }
   });
 }
+const getMP3 = (title, handleMP3) => {
+  setTimeout(() => {
+    handleMP3(null, `${title}.MP3`);
+  }, Math.random() * 5000);
+};
 
+const titles = ['hey-ya', 'gold', 'yellow', 'no-suprises', 'mamma-mia'];
+const getAlbum = (songTitles, handleAlbum) => {
+  let count = 0;
+  let arr = [];
+  songTitles.forEach(function(song, index) {
+    getMP3(song, function(error, mp3File) {
+      ++count;
+      arr[index] = mp3File;
+      if (count === songTitles.length) {
+        handleAlbum(null, arr);
+      }
+    });
+  });
+};
+getAlbum(titles, (err, album) => {
+  console.log(album);
+});
 module.exports = {
   blockingEcho,
   asyncEcho,
