@@ -118,7 +118,7 @@ describe('fetchContentOfFiles', function() {
   });
 });
 
-describe('fetchFilesAndLog', function() {
+describe.only('fetchFilesAndLog', function() {
   it('should be a function', function() {
     expect(fetchFilesAndLog).to.be.a('function');
   });
